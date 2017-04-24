@@ -4,4 +4,4 @@ inspiré du cours sur les finger gamer de gamecodeur.fr
 https://www.gamecodeur.fr/atelier-finger-game-love2d/
 
 Framework utilisé: phaser.io 2.7.7
-temps passé: xx heures
+temps passé: 7 heures
