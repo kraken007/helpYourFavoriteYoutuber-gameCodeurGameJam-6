@@ -75,6 +75,11 @@ var play = {
             if (lignes < this.nbLignes - 1) {
                 this.chooseTheBlackTile(lignes);
                 this.activeLine = lignes;
+                if (lignes == this.nbLignes - 2) {
+                    for (var i = 0; i < this.nbColonnes; i++){
+                        (this.tiles[lignes][i].good == true) ? this.tiles[lignes][i].tint = 0x00CC99 : '';
+                    }
+                }
             }
         }
 
@@ -105,11 +110,8 @@ var play = {
     },
     update: function () {
 
-        //start game
-        if (game.input.activePointer.leftButton.isDown && !this.startGame) {
-            this.startGame = true;
-            this.speed = 1;
-        }
+        //le game start est géré dans la fonction onTap.
+        
         //déplacement des tuiles
         for (var lignes = 0; lignes < this.nbLignes; lignes++) {
             for (var colonnes = 0; colonnes < this.nbColonnes; colonnes++) {
@@ -152,6 +154,7 @@ var play = {
             if (indexCaseNoire === index) {
                 this.tiles[plignes][index].loadTexture(this.goodImage);
                 this.tiles[plignes][index].good = true;
+                //this.tiles[plignes][index].tint = 0xCCFFCC;
             } else {
                 this.tiles[plignes][index].loadTexture(this.badImage);
             }
@@ -163,6 +166,8 @@ var play = {
             //ok
             pSprite.good = false;
             pSprite.loadTexture(this.badImage);
+            pSprite.tint = 0xffffff;
+
             if (this.activeLine == 0) {
                 this.activeLine = this.tiles.length - 1;
             } else {
@@ -204,6 +209,10 @@ var play = {
         }
         else {
             //  A single tap (tap duration was < game.input.tapRate)
+            if (!this.startGame) {
+                this.startGame = true;
+                this.speed = 1;
+            }
         }
     },
     randomYoutuber: function (pName) {
